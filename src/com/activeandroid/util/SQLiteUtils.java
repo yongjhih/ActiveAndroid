@@ -150,8 +150,11 @@ public final class SQLiteUtils {
 			sIndexGroupMap.put(name, list);
 		}
 
-		String group = column.indexGroup();
-		if (!group.isEmpty()) {
+		String[] groups = column.indexGroups();
+		for (String group : groups) {
+			if (group.isEmpty())
+				continue;
+
 			List<String> list = sIndexGroupMap.get(group);
 			if (list == null) {
 				list = new ArrayList<String>();

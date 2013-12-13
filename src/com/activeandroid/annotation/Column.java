@@ -70,14 +70,18 @@ public @interface Column {
 	 *
 	 * @Table(name = "table_name")
 	 * public class Table extends Model {
-	 *     @Column(name = "member1", indexGroup = "group_name")
+	 *     @Column(name = "member1", indexGroups = {"group1"})
 	 *     public String member1;
 	 *
-	 *     @Column(name = "member2", indexGroup = "group_name")
+	 *     @Column(name = "member2", indexGroups = {"group1", "group2"})
 	 *     public String member2;
+	 *
+	 *     @Column(name = "member3", indexGroups = {"group2"})
+	 *     public String member3;
 	 * }
 	 *
-	 * Execute CREATE INDEX index_table_name_group_name on table_name(member1, member2)
+	 * Execute CREATE INDEX index_table_name_group1 on table_name(member1, member2)
+	 * Execute CREATE INDEX index_table_name_group2 on table_name(member2, member3)
 	 */
-	public String indexGroup() default "";
+	public String[] indexGroups() default {};
 }
