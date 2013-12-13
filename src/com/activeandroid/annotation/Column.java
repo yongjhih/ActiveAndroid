@@ -48,5 +48,36 @@ public @interface Column {
 
 	public ConflictAction onUniqueConflict() default ConflictAction.FAIL;
 
+	/*
+	 * If set index = true, we will create a index with single column.
+	 *
+	 * Example:
+	 *
+	 * @Table(name = "table_name")
+	 * public class Table extends Model {
+	 *     @Column(name = "member", index = true)
+	 *     public String member;
+	 * }
+	 *
+	 * Execute CREATE INDEX index_table_name_member on table_name(member)
+	 */
 	public boolean index() default false;
+
+	/*
+	 * If set indexGroup = "group_name", we will create a index with group.
+	 *
+	 * Example:
+	 *
+	 * @Table(name = "table_name")
+	 * public class Table extends Model {
+	 *     @Column(name = "member1", indexGroup = "group_name")
+	 *     public String member1;
+	 *
+	 *     @Column(name = "member2", indexGroup = "group_name")
+	 *     public String member2;
+	 * }
+	 *
+	 * Execute CREATE INDEX index_table_name_group_name on table_name(member1, member2)
+	 */
+	public String indexGroup() default "";
 }
