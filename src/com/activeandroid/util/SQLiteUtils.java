@@ -136,11 +136,7 @@ public final class SQLiteUtils {
 		return definitions.toArray(new String[definitions.size()]);
 	}
 
-	@SuppressWarnings("unchecked")
 	public static void createIndexColumnDefinition(TableInfo tableInfo, Field field) {
-		StringBuilder definition = new StringBuilder();
-
-		Class<?> type = field.getType();
 		final String name = tableInfo.getColumnName(field);
 		final Column column = field.getAnnotation(Column.class);
 
